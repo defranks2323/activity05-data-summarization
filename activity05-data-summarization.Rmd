@@ -1,6 +1,6 @@
 ---
 title: "Activity 5"
-author: "Name"
+author: "Sam DeFrank"
 output: github_document
 ---
 
@@ -79,6 +79,10 @@ There are a number of ways to create a code chunk:
 Below, create a code chunk and name it `median_earnings`.
 Make sure there is an empty line above and below the code chunk.
 
+```{r, median_earnings}
+median_all_majors <- college_recent_grads %>%
+  summarise(median(median)) 
+```
 
 
 In your newly created R code chunk, verify that the median income for all majors was $36,000.
@@ -95,6 +99,20 @@ Be careful when you name your output summaries as we are dealing with things tha
 When I and obtaining numerical summaries for variables, I like to include the variable name in my summary name (e.g., `mean_med_earnings = mean(median)`).
 Create a code chunk and name it `summary_earnings`.
 
+```{r,summary_earnings}
+ summary_earnings<-college_recent_grads %>%
+  select(median) %>%
+  summarise(
+    number_variables = n(),
+    avg_summary_earnings = mean(median),
+    sd_summary_earnings = sd(median),
+    min_summary_earnings = min(median),
+    median_summary_earnings = median(median),
+    max_summary_earnings = max(median))
+  
+  
+  
+```
 
 
 Provide a discussion on what you believe the distribution of median earnings will look like.
@@ -110,6 +128,12 @@ Using the `college_recent_grads` dataset and functions from `{dplyr}`, obtain si
 *Arrange* this summary table by the median earning.
 Create a code chunk and name it `major_earnings`.
 
+```{r,major_earnings}
+college_recent_grads %>%
+  group_by(major_category, median)%>%
+  select(major_category,median)
+  
+```
 
 
 Provide a discussion on how each major compares to the overall distribution.
